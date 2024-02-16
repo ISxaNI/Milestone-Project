@@ -39,19 +39,25 @@ function detectCollisions() {
     })
 }
 
-function toss() {
-    gpcxt.clearRect(0, 0, gamePad.width, gamePad.height);
-    createBall(); // This now draws all balls
-    balls.forEach(ball => {
-        updateBallPosition(ball); // Make sure this function is adapted
-        detectCollisions(ball); // Adapt this function too
-    });
-    requestAnimationFrame(toss);
+function detectBallCollisions() {
+    for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+            const dx = balls[j].x - balls[i].x;
+            const dy = balls[j].y - balls[i].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < balls[i].radius + balls[j].radius) {
+                balls[i].dx = -balls[i].dx;
+                balls[i].dy = -balls[i].dy;
+                balls[j].dx = -balls[j].dx;
+                balls[j].dy = -balls[j].dy;
+            }
+        }
+    }
 }
 
-
-toss()
 document.getElementById('Sizeup').addEventListener('click', function() {
+    balls.forEach(ball => {
     ball.radius += 5; 
     if (ball.radius + ball.x > canvas.width) {
         ball.x = canvas.width - ball.radius;
@@ -59,23 +65,47 @@ document.getElementById('Sizeup').addEventListener('click', function() {
     if (ball.radius + ball.y > canvas.height) {
         ball.y = canvas.height - ball.radius;
     }
+})
 });
 
 document.getElementById('Sizedown').addEventListener('click', function() {
+    balls.forEach(ball => {
     ball.radius -= 5;
     if (ball.radius < 5) {
         ball.radius = 1; 
     }
+})
 });
 
 document.getElementById('Add').addEventListener('click', function() {
     const newBall = {
-        x: Math.random() * (gamePad.width - 20) + 10, // Random x position
-        y: Math.random() * (gamePad.height - 20) + 10, // Random y position
-        dx: (Math.random() - 0.5) * 4, // Random x velocity
-        dy: (Math.random() - 0.5) * 4, // Random y velocity
-        radius: 10 // Default radius
+        x: Math.random() * (gamePad.width - 20) + 10,
+        y: Math.random() * (gamePad.height - 20) + 10,
+        dx: (Math.random() - 0.5) * 4,
+        dy: (Math.random() - 0.5) * 4,
+        radius: 10
     };
-    balls.push(newBall); // Add the new ball to the balls array
+    balls.push(newBall);
 });
 
+function toss() {
+    gpcxt.clearRect(0, 0, gamePad.width, gamePad.height);
+    createBall();
+    updateBallPosition(ball);
+    detectBallCollisions();
+    detectCollisions(ball);
+    requestAnimationFrame(toss);
+}
+
+async function colorShift() {
+    
+}
+
+toss()
+
+//NEXT UP ON THE LIST OF WHAT TO DO:
+
+//SETUP PROPER OPERATION USE OF COLOR AND SPEED. SETTING COLOR TO RAINBOW BECAUSE HONESTLY. 
+//THAT SEEMS EASIER. SETTING SPEED SO YOU CAN INCREASE AND DECREASE THE VELOCITY OF OBJECTS. 
+//IF I REMEMBER RIGHT, I HAVE TO SETUP A ASYNC FUNCTION FOR THE COLOR CHANGE FUNCTIONALITY.
+//DONT FORGET ABOUT THE AWAIT AND EVERYTHING TOO. NEED TO SET IT UP CORRECTLY.
