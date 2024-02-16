@@ -1,0 +1,45 @@
+body {
+    background: white;
+}
+
+#playerbox {
+    height: 500px;
+    width: 500px;
+    align-items: center;
+    outline: 1px solid cyan;
+    margin: 10px auto;
+    background-color: white;
+    margin-top: 100px;
+}
+
+#menubox {
+    outline: 1px solid cyan;
+    width: 500px;
+    height: 80px;
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    background-color: gray;
+}
+
+#canvas {
+    background: rgb(195, 195, 255);
+}
+
+button {
+    background-color: rgb(193, 193, 193);
+    outline: 3px ridge rgb(103, 103, 103);
+    border-radius: 5px;
+    height: 70px;
+    width: 80px;
+
+}
+
+#Add {
+    background-color: white;
+    font-size: large;
+    font-weight: 700;
+    width: 100px;
+}
+
