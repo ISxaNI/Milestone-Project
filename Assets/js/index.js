@@ -9,6 +9,10 @@ let ball = {
     radius: 10
 }
 
+const acceleration = 1.4
+
+const deceleration = 0.9
+
 let balls = []
 
 function createBall() {
@@ -85,33 +89,15 @@ document.getElementById('Add').addEventListener('click', function() {
 
 document.getElementById('Speedup').addEventListener('click', function() {
     balls.forEach(ball => {
-        ball.dx += 1;
-        if(ball.dx <=  -1) {
-            ball.dx -= 1
-        }
-        ball.dy += 1;
-        if(ball.dy <= -1) {
-            ball.dy -= 1
-        }
+        ball.dx *= acceleration;
+        ball.dy *= acceleration;
     })
 })
 
 document.getElementById('Speeddown').addEventListener('click', function() {
     balls.forEach(ball => {
-        ball.dx -= 1;
-        if(-1 <= ball.dx >= 1 ) {
-            ball.dx = 0;
-        }
-        if(ball.dx <= -1) {
-            ball.dx += 1
-        }
-        ball.dy -= 1;
-        if(-1 <= ball.dy >= 1) {
-            ball.dy = 0;
-        }
-        if(ball.dy <= -1) {
-            ball.dy += 1
-        }
+        ball.dx *= deceleration;
+        ball.dy *= deceleration;
     })
 })
 
