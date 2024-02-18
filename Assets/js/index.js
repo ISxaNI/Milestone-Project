@@ -9,9 +9,9 @@ let ball = {
     radius: 10
 }
 
-const acceleration = 1.4
+const acceleration = 1.25
 
-const deceleration = 0.9
+const deceleration = 0.75
 
 let balls = []
 
@@ -51,13 +51,26 @@ function detectBallCollisions() {
             const distance = Math.sqrt(dx * dx + dy * dy);
             
             if (distance < balls[i].radius + balls[j].radius) {
-                balls[i].dx = -balls[i].dx;
-                balls[i].dy = -balls[i].dy;
-                balls[j].dx = -balls[j].dx;
-                balls[j].dy = -balls[j].dy;
+                handleCollision(balls[i], balls[j], dx, dy, distance);
             }
         }
     }
+}
+
+function handleCollision(ball1, ball2, dx, dy, distance) {
+    const vecx = dx / distance;
+    const vecy = dy / distance;
+
+    const projection1 = ball1.dx * vecx + ball1.dy * vecy;
+    const projection2 = ball2.dx * vecx + ball2.dy * vecy;
+
+    const tP1 = projection1;
+    const tP2 = projection2;
+
+    ball1.dx += (tP2 - tP1) * vecx;
+    ball1.dy += (tP2 - tP1) * vecy;
+    ball2.dx += (tP1 - tP2) * vecx;
+    ball2.dy += (tP1 - tP2) * vecy;
 }
 
 document.getElementById('Sizeup').addEventListener('click', function() {
@@ -134,8 +147,4 @@ function toss() {
 toss()
 
 //NEXT UP ON THE LIST OF WHAT TO DO:
-
-//SETUP PROPER OPERATION USE OF  SPEED.
-//SETTING SPEED SO YOU CAN INCREASE AND DECREASE THE VELOCITY OF OBJECTS. 
-
 //DONT FORGET ABOUT THE AWAIT AND EVERYTHING TOO. NEED TO SET IT UP CORRECTLY.
