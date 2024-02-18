@@ -1,6 +1,6 @@
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
-
+let isColorShifting = false;
 let ball = {
     x: gamePad.width / 2,
     y: gamePad.height - 30,
@@ -90,7 +90,15 @@ document.getElementById('Add').addEventListener('click', function() {
 });
 
 async function colorShiftToggle() {
-    while (true) {
+    isColorShifting = !isColorShifting
+
+    const toggleButton = document.getElementById('Color')
+
+    if (colorShiftToggle) {
+        toggleButton.style.backgroundColor = `rgb(100,100,255)`
+    }
+
+    while (isColorShifting) {
             balls.forEach(ball => {
                 ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
             });
