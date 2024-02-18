@@ -15,7 +15,7 @@ function createBall() {
     balls.forEach(ball => {
         gpcxt.beginPath();
         gpcxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
-        gpcxt.fillStyle = "#0095DD";
+        gpcxt.fillStyle = ball.color || "#0095DD";
         gpcxt.fill();
         gpcxt.closePath();
     });
@@ -77,8 +77,14 @@ document.getElementById('Sizedown').addEventListener('click', function() {
 })
 });
 
+document.getElementById('Color').addEventListener('click', function() {
+
+
+})
+
 document.getElementById('Add').addEventListener('click', function() {
     const newBall = {
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
         x: Math.random() * (gamePad.width - 20) + 10,
         y: Math.random() * (gamePad.height - 20) + 10,
         dx: (Math.random() - 0.5) * 4,
@@ -88,17 +94,18 @@ document.getElementById('Add').addEventListener('click', function() {
     balls.push(newBall);
 });
 
+document.getElementById('Color').addEventListener('click', function() {
+
+    
+})
+
 function toss() {
     gpcxt.clearRect(0, 0, gamePad.width, gamePad.height);
     createBall();
-    updateBallPosition(ball);
+    updateBallPosition();
     detectBallCollisions();
-    detectCollisions(ball);
+    detectCollisions();
     requestAnimationFrame(toss);
-}
-
-async function colorShift() {
-    
 }
 
 toss()
