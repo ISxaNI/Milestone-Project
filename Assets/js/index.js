@@ -1,3 +1,4 @@
+//=====================================LET AND CONSTANTS START========================================
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
 let isColorShifting = false;
@@ -14,7 +15,8 @@ const acceleration = 1.25
 const deceleration = 0.75
 
 let balls = []
-
+//========================================LET AND CONSTANTS END======================================
+//============================================FUNCTIONS START========================================
 function createBall() {
     balls.forEach(ball => {
         gpcxt.beginPath();
@@ -70,6 +72,8 @@ function detectBallCollisions() {
 }
 
 function handleCollision(ball1, ball2, dx, dy, distance) {
+    let overlap = (ball1.radius + ball2.radius) - distance;
+
     const vecx = dx / distance;
     const vecy = dy / distance;
 
@@ -79,11 +83,41 @@ function handleCollision(ball1, ball2, dx, dy, distance) {
     const tP1 = projection1;
     const tP2 = projection2;
 
+    ball1.x -= overlap * vecx / 2;
+    ball1.y -= overlap * vecy / 2;
+    ball2.x += overlap * vecx / 2;
+    ball2.y += overlap * vecy / 2;
+
     ball1.dx += (tP2 - tP1) * vecx;
     ball1.dy += (tP2 - tP1) * vecy;
     ball2.dx += (tP1 - tP2) * vecx;
     ball2.dy += (tP1 - tP2) * vecy;
 }
+
+//================================================FUNCTIONS END======================================
+//==========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES START ======================
+
+async function colorShiftToggle() {
+    isColorShifting = !isColorShifting
+
+    const toggleButton = document.getElementById('Color')
+
+    if (isColorShifting) {
+        toggleButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+    } else {
+        toggleButton.style.backgroundColor = ``
+    }
+
+    while (isColorShifting) {
+            balls.forEach(ball => {
+                ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+            });
+        await new Promise(resolve => setTimeout(resolve, 50))
+    }
+}
+
+//===========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES END========================
+//=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC START=====================
 
 document.getElementById('Sizeup').addEventListener('click', function() {
     balls.forEach(ball => {
@@ -118,27 +152,9 @@ document.getElementById('Speeddown').addEventListener('click', function() {
     })
 })
 
-async function colorShiftToggle() {
-    isColorShifting = !isColorShifting
-
-    const toggleButton = document.getElementById('Color')
-
-    if (isColorShifting) {
-        toggleButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-    } else {
-        toggleButton.style.backgroundColor = ``
-    }
-
-    while (isColorShifting) {
-            balls.forEach(ball => {
-                ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-            });
-        await new Promise(resolve => setTimeout(resolve, 50))
-    }
-}
-
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
-
+//=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC END=======================
+//=================================FINAL FUNCTION FOR LOADING THE GAME===============================
 function toss() {
     gpcxt.clearRect(0, 0, gamePad.width, gamePad.height);
     createBall();

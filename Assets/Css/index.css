@@ -38,7 +38,7 @@ button {
     justify-content: space-evenly;
 }
 
-#Add {
+#Add, #Amount{
     background-color: white;
     font-size: large;
     font-weight: 700;
