@@ -25,6 +25,18 @@ function createBall() {
     });
 }
 
+function addBallButton() {
+const newBall = {
+    color: `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`,
+    x: Math.random() * (gamePad.width - 20) + 10,
+    y: Math.random() * (gamePad.height - 20) + 10,
+    dx: (Math.random() - 0.5) * 4,
+    dy: (Math.random() - 0.5) * 4,
+    radius: 10
+};
+balls.push(newBall);
+}
+
 function updateBallPosition() {
     balls.forEach(ball => {
     ball.x += ball.dx;
@@ -75,30 +87,22 @@ function handleCollision(ball1, ball2, dx, dy, distance) {
 
 document.getElementById('Sizeup').addEventListener('click', function() {
     balls.forEach(ball => {
-    ball.radius += 5; 
+    ball.radius *= 1.2; 
 })
 });
 
 document.getElementById('Sizedown').addEventListener('click', function() {
     balls.forEach(ball => {
-    ball.radius -= 5;
-    if (ball.radius < 5) {
-        ball.radius = 1; 
-    }
+    ball.radius *= 0.85;
 })
 });
 
-document.getElementById('Add').addEventListener('click', function() {
-    const newBall = {
-        color: `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`,
-        x: Math.random() * (gamePad.width - 20) + 10,
-        y: Math.random() * (gamePad.height - 20) + 10,
-        dx: (Math.random() - 0.5) * 4,
-        dy: (Math.random() - 0.5) * 4,
-        radius: 10
-    };
-    balls.push(newBall);
-});
+document.getElementById('Add').addEventListener('click', addBallButton);
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Space" || event.code === "space")
+    addBallButton()
+})
 
 document.getElementById('Speedup').addEventListener('click', function() {
     balls.forEach(ball => {
