@@ -128,6 +128,9 @@ document.getElementById('Sizeup').addEventListener('click', function() {
 document.getElementById('Sizedown').addEventListener('click', function() {
     balls.forEach(ball => {
     ball.radius *= 0.85;
+    if (ball.radius <= 2) {
+        ball.radius = 2
+    }
 })
 });
 
