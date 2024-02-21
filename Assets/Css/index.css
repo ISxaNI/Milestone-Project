@@ -38,8 +38,7 @@ button {
     justify-content: space-evenly;
     margin: auto;
     text-align: center;
-    line-height: 65px;
-    
+    line-height: 20px;
 }
 
 #Add, #Amount{
@@ -55,6 +54,7 @@ button {
     font-size: 0.6em;
     font-weight: 800;
     padding: 0;
+    line-height: 10px;
 }
 
 input {

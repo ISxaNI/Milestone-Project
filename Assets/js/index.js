@@ -20,7 +20,7 @@ let balls = []
 function createBall() {
     balls.forEach(ball => {
         gpcxt.beginPath();
-        gpcxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
+        gpcxt.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
         gpcxt.fillStyle = ball.color;
         gpcxt.fill();
         gpcxt.closePath();
@@ -28,42 +28,48 @@ function createBall() {
 }
 
 function addBallButton() {
-const newBall = {
-    color: `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`,
-    x: Math.random() * (gamePad.width - 20) + 10,
-    y: Math.random() * (gamePad.height - 20) + 10,
-    dx: (Math.random() - 0.5) * 4,
-    dy: (Math.random() - 0.5) * 4,
-    radius: 10
-};
-balls.push(newBall);
+    const newBall = {
+        color: `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`,
+        x: Math.random() * (gamePad.width - 20) + 10,
+        y: Math.random() * (gamePad.height - 20) + 10,
+        dx: (Math.random() - 0.5) * 4,
+        dy: (Math.random() - 0.5) * 4,
+        radius: 10
+    };
+    balls.push(newBall);
+}
+
+function addMultipleBalls(SpawnAmount) {
+    for (let i = 0; i < SpawnAmount; i++) {
+        addBallButton()
+    }
 }
 
 function updateBallPosition() {
     balls.forEach(ball => {
-    ball.x += ball.dx;
-    ball.y += ball.dy; 
-})
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+    })
 }
 
 function detectCollisions() {
     balls.forEach(ball => {
-    if (ball.x + ball.dx > gamePad.width - ball.radius || ball.x + ball.dx < ball.radius) {
-        ball.dx = -ball.dx;
-    }
-    if (ball.y + ball.dy > gamePad.height - ball.radius || ball.y + ball.dy < ball.radius) {
-        ball.dy = -ball.dy;
-    }
+        if (ball.x + ball.dx > gamePad.width - ball.radius || ball.x + ball.dx < ball.radius) {
+            ball.dx = -ball.dx;
+        }
+        if (ball.y + ball.dy > gamePad.height - ball.radius || ball.y + ball.dy < ball.radius) {
+            ball.dy = -ball.dy;
+        }
     })
 }
 
-function detectBallCollisions() {
+function detectBallCollisions() { //Had Assistance with sources cited in the README to figure out the physics and usage of vector
     for (let i = 0; i < balls.length; i++) {
         for (let j = i + 1; j < balls.length; j++) {
             const dx = balls[j].x - balls[i].x;
             const dy = balls[j].y - balls[i].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (distance < balls[i].radius + balls[j].radius) {
                 handleCollision(balls[i], balls[j], dx, dy, distance);
             }
@@ -109,9 +115,9 @@ async function colorShiftToggle() {
     }
 
     while (isColorShifting) {
-            balls.forEach(ball => {
-                ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-            });
+        balls.forEach(ball => {
+            ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+        });
         await new Promise(resolve => setTimeout(resolve, 50))
     }
 }
@@ -119,46 +125,54 @@ async function colorShiftToggle() {
 //===========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES END========================
 //=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC START=====================
 
-document.getElementById('Sizeup').addEventListener('click', function() {
+document.getElementById('Sizeup').addEventListener('click', function () {
     balls.forEach(ball => {
-    ball.radius *= 1.2; 
-})
+        ball.radius *= 1.2;
+    })
 });
 
-document.getElementById('Sizedown').addEventListener('click', function() {
+document.getElementById('Sizedown').addEventListener('click', function () {
     balls.forEach(ball => {
-    ball.radius *= 0.85;
-    if (ball.radius <= 2) {
-        ball.radius = 2
-    }
-})
+        ball.radius *= 0.85;
+        if (ball.radius <= 2) {
+            ball.radius = 2
+        }
+    })
 });
 
 document.getElementById('Add').addEventListener('click', addBallButton);
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === "Space" || event.code === "space")
-    addBallButton()
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Space" || event.code === "space") {
+        addBallButton()
+    }
 })
 
-document.getElementById('Speedup').addEventListener('click', function() {
+document.getElementById('SpawnCustom').addEventListener('click', function () {
+    const SpawnAmountInput = document.getElementById('SpawnAmount');
+    const SpawnAmount = parseInt(SpawnAmountInput.value);
+
+    addMultipleBalls(SpawnAmount)
+})
+
+document.getElementById('Speedup').addEventListener('click', function () {
     balls.forEach(ball => {
         ball.dx *= acceleration;
         ball.dy *= acceleration;
     })
 })
 
-document.getElementById('Speeddown').addEventListener('click', function() {
+document.getElementById('Speeddown').addEventListener('click', function () {
     balls.forEach(ball => {
         ball.dx *= deceleration;
         ball.dy *= deceleration;
     })
 })
 
-document.getElementById('Clear').addEventListener('click', function() {
-        gpcxt.clearRect(0,0, gamePad.width, gamePad.height)
+document.getElementById('Clear').addEventListener('click', function () {
+    gpcxt.clearRect(0, 0, gamePad.width, gamePad.height)
 
-        balls = [];
+    balls = [];
 })
 
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
