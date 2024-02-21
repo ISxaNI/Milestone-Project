@@ -34,7 +34,7 @@ function createBall() {
 
 function addBallButton() {
     const newBall = {
-        color: `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`,
+        color: `hsl(180, 100%, 50%)`,
         x: Math.random() * (gamePad.width - 20) + 10,
         y: Math.random() * (gamePad.height - 20) + 10,
         dx: (Math.random() - 0.5) * 4,
@@ -142,7 +142,7 @@ async function transition() {
 
         transitionButton.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
 
-        await new Promise(resolve => setTimeout(resolve, 2))
+        await new Promise(resolve => setTimeout(resolve, 5))
     }
 
     if (!isTransitioning) {
