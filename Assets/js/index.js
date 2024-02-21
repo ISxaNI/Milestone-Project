@@ -1,7 +1,12 @@
 //=====================================LET AND CONSTANTS START========================================
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
+let isTransitioning = false;
 let isColorShifting = false;
+let hueDirection = false;
+let hue = 250;
+let hueShift = 1;
+
 let ball = {
     x: gamePad.width / 2,
     y: gamePad.height - 30,
@@ -122,6 +127,28 @@ async function colorShiftToggle() {
     }
 }
 
+async function transition() {
+    isTransitioning = !isTransitioning;
+
+    const transitionButton = document.getElementById('Rainbow')
+
+    if (isTransitioning) {
+        transitionButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+    } else {
+        transitionButton.style.backgroundColor = ``
+    }
+
+    while (isTransitioning) {
+        hue += 4;
+
+        balls.forEach(ball => {
+            ball.color = `hsl(${hue}, 100%, 50%)`
+        })
+        await new Promise(resolve => setTimeout(resolve, 2))
+    }
+
+}
+
 //===========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES END========================
 //=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC START=====================
 
@@ -176,6 +203,8 @@ document.getElementById('Clear').addEventListener('click', function () {
 })
 
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
+
+document.getElementById('Rainbow').addEventListener('click', transition)
 //=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC END=======================
 //=================================FINAL FUNCTION FOR LOADING THE GAME===============================
 function toss() {
