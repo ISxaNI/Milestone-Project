@@ -1,3 +1,5 @@
+Welcome to my Introduction/info page on my milestone Project!
+
 I want to give atleast a bit of an introduction to the game. 
 
 I guess this is technically a game but in all reality, it's a bit different from your usual games.
@@ -10,9 +12,17 @@ You can do as you please, as long as your computer has the "balls" do process ev
 
 ha
 ---------------------------------------------------------------------------------------------------------------------------
+                                               INSPIRATION FOR THE GAME  
+---------------------------------------------------------------------------------------------------------------------------
+This game is by no means on par with the game I am using for reference, but the link is to the game that i based the blueprint off of
+
+https://keiwan.itch.io/evolution
+---------------------------------------------------------------------------------------------------------------------------
                                                       ABOUT THE GAME  
 ---------------------------------------------------------------------------------------------------------------------------
 To explain a bit more in detail about all of the options, I'll start at the beginning.
+
+In a sense, its not your traditional game. It's more like a toy, like building a structure out of legos.
 
 The balls have collision physics (basic but still) so they bounce off of each other and walls. 
 
