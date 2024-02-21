@@ -155,6 +155,12 @@ document.getElementById('Speeddown').addEventListener('click', function() {
     })
 })
 
+document.getElementById('Clear').addEventListener('click', function() {
+        gpcxt.clearRect(0,0, gamePad.width, gamePad.height)
+
+        balls = [];
+})
+
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
 //=========================EVENTS, CLICK FUNCTIONS, KEYDOWN FUNCTIONS, ETC END=======================
 //=================================FINAL FUNCTION FOR LOADING THE GAME===============================

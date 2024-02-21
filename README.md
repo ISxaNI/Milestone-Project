@@ -8,3 +8,6 @@ Made by danielstuts, the same person who is the creator of the repository above.
 ---------------------------------------------------------------------------------------------------------------------------
 https://www.w3schools.com/jsref/jsref_obj_math.asp
 For all added information that i needed, as in any properties that i needed to find that I have not had detailed enough of information on as of the start of the project.
+---------------------------------------------------------------------------------------------------------------------------
+https://www.w3docs.com/snippets/javascript/how-to-clear-the-canvas-for-redrawing.html
+Used for reference on the way to clear the canvas page.
