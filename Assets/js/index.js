@@ -109,46 +109,51 @@ function handleCollision(ball1, ball2, dx, dy, distance) {
 //==========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES START ======================
 
 async function colorShiftToggle() {
-    isColorShifting = !isColorShifting
+    if (isTransitioning) return;
 
-    const toggleButton = document.getElementById('Color')
+    isColorShifting = !isColorShifting;
 
-    while (isColorShifting) {
-        balls.forEach(ball => {
-            ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-        });
+    if (isColorShifting) {
+        const toggleButton = document.getElementById('Color');
 
-        toggleButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+        while (isColorShifting) {
+            balls.forEach(ball => {
+                ball.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
+            });
 
-        await new Promise(resolve => setTimeout(resolve, 50))
-    }
+            toggleButton.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
 
-    if (!isColorShifting) {
-        toggleButton.style.backgroundColor = ``
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        if (!isColorShifting) {
+            toggleButton.style.backgroundColor = ``;
+        }
     }
 }
 
 async function transition() {
+    if (isColorShifting) return;
+
     isTransitioning = !isTransitioning;
 
-    const transitionButton = document.getElementById('Rainbow')
+    if (isTransitioning) {
+        const transitionButton = document.getElementById('Rainbow');
 
-    while (isTransitioning) {
-        hue += 1;
+        while (isTransitioning) {
+            hue += 1;
 
-        balls.forEach(ball => {
-            ball.color = `hsl(${hue}, 100%, 50%)`
-        })
+            balls.forEach(ball => {
+                ball.color = `hsl(${hue}, 100%, 50%)`;
+            });
 
-        transitionButton.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
+            transitionButton.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
 
-        await new Promise(resolve => setTimeout(resolve, 5))
+            await new Promise(resolve => setTimeout(resolve, 5));
+        }
+        if (!isTransitioning) {
+            transitionButton.style.backgroundColor = ``;
+        }
     }
-
-    if (!isTransitioning) {
-        transitionButton.style.backgroundColor = ``;
-    }
-
 }
 
 //===========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES END========================
