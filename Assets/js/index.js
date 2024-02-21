@@ -113,17 +113,18 @@ async function colorShiftToggle() {
 
     const toggleButton = document.getElementById('Color')
 
-    if (isColorShifting) {
-        toggleButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-    } else {
-        toggleButton.style.backgroundColor = ``
-    }
-
     while (isColorShifting) {
         balls.forEach(ball => {
             ball.color = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
         });
+
+        toggleButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
+
         await new Promise(resolve => setTimeout(resolve, 50))
+    }
+
+    if (!isColorShifting) {
+        toggleButton.style.backgroundColor = ``
     }
 }
 
@@ -132,19 +133,20 @@ async function transition() {
 
     const transitionButton = document.getElementById('Rainbow')
 
-    if (isTransitioning) {
-        transitionButton.style.backgroundColor = `rgb( ${Math.random() * 255}, ${Math.random() * 255}, 255)`
-    } else {
-        transitionButton.style.backgroundColor = ``
-    }
-
     while (isTransitioning) {
-        hue += 4;
+        hue += 1;
 
         balls.forEach(ball => {
             ball.color = `hsl(${hue}, 100%, 50%)`
         })
+
+        transitionButton.style.backgroundColor = `hsl(${hue}, 100%, 50%)`
+
         await new Promise(resolve => setTimeout(resolve, 2))
+    }
+
+    if (!isTransitioning) {
+        transitionButton.style.backgroundColor = ``;
     }
 
 }
