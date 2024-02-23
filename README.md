@@ -38,7 +38,21 @@ Lastly, if you either filled the screen too much or would rather reset the board
 
 Hope ya enjoy!
 
+---------------------------------------------------------------------------------------------------------------------------
+                                                     CONTROLS
+---------------------------------------------------------------------------------------------------------------------------
+Outside of the actual buttons that you can use and click to have the functions work properly, there are also a set of controls 
+made so the functions can be more easily used.
 
+Here are the controls for the game:
+
+ArrowUp: Increase Size
+ArrowDown: Decrease Size
+ArrowLeft: Slow down speed
+ArrowRight: Accelerate speed
+Backspace: Clear Page
+Enter: Spawn in while keeping in mind of the custom amount
+Space: Spawn individual
 
 ---------------------------------------------------------------------------------------------------------------------------
                    SITES, REPOSITORIES, AND SOURCES WHICH I HAVE SOURCED MY INFORMATION AND CODE FROM.
@@ -68,7 +82,8 @@ Used for reference on the way to clear the canvas page.
 https://www.flaticon.com/authors/the-icon-tree
 "https://www.flaticon.com/free-icons/growth" title="growth icons">Growth icons created by Freepik - Flaticon
 https://www.flaticon.com/free-icon/down-time_6117080?term=down+arrow&page=1&position=74&origin=search&related_id=6117080
-https://wallpaperswide.com/glossy_blue_balls_background-wallpapers.html
+https://wallpaperswide.com/glossy_blue_balls_background-wallpapers.html - By Philippe Put
 https://www.flaticon.com/free-icon/efficiency_10327473?term=up+time&page=1&position=17&origin=search&related_id=10327473
-https://wallpaperswide.com/razer_rainbow_spectrum_background-wallpapers.html
-https://giphy.com/gifs/trippy-rainbow-color-l378vg4Pm9LGnmD6M
+https://wallpaperswide.com/razer_rainbow_spectrum_background-wallpapers.html - posted by Liam809
+https://giphy.com/gifs/trippy-rainbow-color-l378vg4Pm9LGnmD6M - by Feliks Tomasz Konczakowski
+https://giphy.com/gifs/wakest-art-animation-film-IAeJGf85NsGlO - By Liaizon Wakest

@@ -34,7 +34,7 @@ function createBall() {
 
 function addBallButton() {
     const newBall = {
-        color: `hsl(180, 100%, 50%)`,
+        color: `hsl(232, 71%, 44%)`,
         x: Math.random() * (gamePad.width - 20) + 10,
         y: Math.random() * (gamePad.height - 20) + 10,
         dx: (Math.random() - 0.5) * 4,
@@ -121,11 +121,16 @@ async function colorShiftToggle() {
                 ball.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
             });
 
-            toggleButton.style.backgroundImage = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
+            toggleButton.style.backgroundColor = 'transparent';
+            toggleButton.style.backgroundImage = `url('Assets/Images/Blue-spasm.gif')`;
+            toggleButton.style.backgroundPosition = 'center';
+            toggleButton.style.backgroundRepeat = 'no-repeat';
+            toggleButton.style.backgroundSize = 'cover';
 
             await new Promise(resolve => setTimeout(resolve, 50));
         }
         if (!isColorShifting) {
+            toggleButton.style.backgroundImage = ``;
             toggleButton.style.backgroundColor = ``;
         }
     }
@@ -138,6 +143,7 @@ async function transition() {
 
     if (isTransitioning) {
         const transitionButton = document.getElementById('Rainbow');
+        const bodyTransition = document.getElementById('body')
 
         while (isTransitioning) {
             hue += 1;
@@ -145,17 +151,23 @@ async function transition() {
             balls.forEach(ball => {
                 ball.color = `hsl(${hue}, 100%, 50%)`;
             });
-            transitionButton.style.backgroundColor = 'transparent'
+            transitionButton.style.backgroundColor = 'transparent';
             transitionButton.style.backgroundImage = `url('Assets/Images/RainbowSpiral.gif')`;
             transitionButton.style.backgroundPosition = 'center';
-             transitionButton.style.backgroundRepeat = 'no-repeat';
+            transitionButton.style.backgroundRepeat = 'no-repeat';
             transitionButton.style.backgroundSize = 'cover'; 
+            bodyTransition.style.backgroundColor = 'transparent';
+            bodyTransition.style.backgroundImage = `url('Assets/Images/razer_rainbow_spectrum_background-wallpaper-3840x2160.jpg')`;
 
             await new Promise(resolve => setTimeout(resolve, 5));
         }
         if (!isTransitioning) {
-            transitionButton.style.backgroundImage = ''
+            transitionButton.style.backgroundImage = '';
             transitionButton.style.backgroundColor = '';
+            bodyTransition.style.backgroundImage = '';
+            balls.forEach(ball => {
+                ball.color = `hsl(232, 71%, 44%)`;
+            });
         }
     }
 }
@@ -179,12 +191,6 @@ document.getElementById('Sizedown').addEventListener('click', function () {
 });
 
 document.getElementById('Add').addEventListener('click', addBallButton);
-
-document.addEventListener('keydown', function (event) {
-    if (event.key === "Space" || event.code === "space") {
-        addBallButton()
-    }
-})
 
 document.getElementById('SpawnCustom').addEventListener('click', function () {
     const SpawnAmountInput = document.getElementById('SpawnAmount');
@@ -212,7 +218,67 @@ document.getElementById('Clear').addEventListener('click', function () {
 
     balls = [];
 })
+//======================================================KEYSTROKE EVENTS=============================
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Space" || event.code === "space") {
+        addBallButton()
+    }
+})
 
+document.addEventListener('keydown', function (event) {
+    if (event.key === "ArrowUp" || event.code === "ArrowUp") {
+        balls.forEach(ball => {
+            ball.radius *= 1.2;
+        })
+    }
+})
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "ArrowDown" || event.code === "ArrowDown") {
+        balls.forEach(ball => {
+            ball.radius *= 0.85;
+            if (ball.radius <= 2) {
+                ball.radius = 2
+            }
+        })
+    }
+})
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Enter" || event.code === "Enter") {
+        const SpawnAmountInput = document.getElementById('SpawnAmount');
+    const SpawnAmount = parseInt(SpawnAmountInput.value);
+
+    addMultipleBalls(SpawnAmount)
+    }
+})
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Backspace" || event.code === "Backspace") {
+        gpcxt.clearRect(0, 0, gamePad.width, gamePad.height)
+
+        balls = [];
+    }
+})
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "ArrowLeft" || event.code === "ArrowLeft") {
+        balls.forEach(ball => {
+            ball.dx *= deceleration;
+            ball.dy *= deceleration;
+        })
+    }
+})
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === "ArrowRight" || event.code === "ArrowRight") {
+        balls.forEach(ball => {
+            ball.dx *= acceleration;
+            ball.dy *= acceleration;
+        })
+    }
+})
+//======================================================KEYSTROKE EVENTS=============================
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
 
 document.getElementById('Rainbow').addEventListener('click', transition)
