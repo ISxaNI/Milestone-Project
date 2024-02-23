@@ -3,9 +3,7 @@ const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
 let isTransitioning = false;
 let isColorShifting = false;
-let hueDirection = false;
 let hue = 250;
-let hueShift = 1;
 
 let ball = {
     x: gamePad.width / 2,

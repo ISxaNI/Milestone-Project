@@ -27,7 +27,7 @@ background-repeat: no-repeat;
 }
 
 #canvas {
-    background: rgb(195, 195, 255);
+    background-color: rgb(94, 94, 94);
 }
 
 button {
