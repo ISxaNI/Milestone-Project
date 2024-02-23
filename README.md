@@ -61,3 +61,14 @@ For all added information that i needed, as in any properties that i needed to f
 ---------------------------------------------------------------------------------------------------------------------------
 https://www.w3docs.com/snippets/javascript/how-to-clear-the-canvas-for-redrawing.html
 Used for reference on the way to clear the canvas page.
+
+---------------------------------------------------------------------------------------------------------------------------
+                                                        IMG SOURCES,
+---------------------------------------------------------------------------------------------------------------------------
+https://www.flaticon.com/authors/the-icon-tree
+"https://www.flaticon.com/free-icons/growth" title="growth icons">Growth icons created by Freepik - Flaticon
+https://www.flaticon.com/free-icon/down-time_6117080?term=down+arrow&page=1&position=74&origin=search&related_id=6117080
+https://wallpaperswide.com/glossy_blue_balls_background-wallpapers.html
+https://www.flaticon.com/free-icon/efficiency_10327473?term=up+time&page=1&position=17&origin=search&related_id=10327473
+https://wallpaperswide.com/razer_rainbow_spectrum_background-wallpapers.html
+https://giphy.com/gifs/trippy-rainbow-color-l378vg4Pm9LGnmD6M
