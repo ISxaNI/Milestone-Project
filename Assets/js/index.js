@@ -121,7 +121,7 @@ async function colorShiftToggle() {
                 ball.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
             });
 
-            toggleButton.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
+            toggleButton.style.backgroundImage = `rgb(${Math.random() * 255}, ${Math.random() * 255}, 255)`;
 
             await new Promise(resolve => setTimeout(resolve, 50));
         }
@@ -145,13 +145,17 @@ async function transition() {
             balls.forEach(ball => {
                 ball.color = `hsl(${hue}, 100%, 50%)`;
             });
-
-            transitionButton.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+            transitionButton.style.backgroundColor = 'transparent'
+            transitionButton.style.backgroundImage = `url('Assets/Images/RainbowSpiral.gif')`;
+            transitionButton.style.backgroundPosition = 'center';
+             transitionButton.style.backgroundRepeat = 'no-repeat';
+            transitionButton.style.backgroundSize = 'cover'; 
 
             await new Promise(resolve => setTimeout(resolve, 5));
         }
         if (!isTransitioning) {
-            transitionButton.style.backgroundColor = ``;
+            transitionButton.style.backgroundImage = ''
+            transitionButton.style.backgroundColor = '';
         }
     }
 }

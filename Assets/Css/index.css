@@ -1,7 +1,7 @@
 body {
     background-image: url(/Assets/Images/glossy_blue_balls_background-wallpaper-3840x2160.jpg);
-background-size: 1920px 1080px;
-
+background-size: cover;
+background-repeat: no-repeat;
 }
 
 #playerbox {
