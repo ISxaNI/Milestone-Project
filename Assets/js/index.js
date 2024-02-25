@@ -181,7 +181,7 @@ async function transition() {
         if (!isTransitioning) {
             transitionButton.style.backgroundImage = '';
             transitionButton.style.backgroundColor = '';
-            bodyTransition.style.backgroundImage = '';
+            bodyTransition.style.backgroundImage = `url('Assets/Images/BlueBackground.jpg')`;
             bodyTransition.style.backgroundSize = '';
             countNumber.style.color = '';
             balls.forEach(ball => {
