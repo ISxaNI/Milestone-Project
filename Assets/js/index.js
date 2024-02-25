@@ -1,11 +1,15 @@
 //=====================================LET AND CONSTANTS START========================================
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
+const Counter = document.getElementById(ballCount)
+const acceleration = 1.25
+const deceleration = 0.75
+
 let gravityEnabled = false;
 let isTransitioning = false;
 let isColorShifting = false;
 let hue = 250;
-
+let balls = []
 let ball = {
     x: gamePad.width / 2,
     y: gamePad.height - 30,
@@ -13,12 +17,6 @@ let ball = {
     dy: -2,
     radius: 10
 }
-
-const acceleration = 1.25
-
-const deceleration = 0.75
-
-let balls = []
 //========================================LET AND CONSTANTS END======================================
 //============================================FUNCTIONS START========================================
 function createBall() {
@@ -160,6 +158,7 @@ async function transition() {
     if (isTransitioning) {
         const transitionButton = document.getElementById('Rainbow');
         const bodyTransition = document.getElementById('body')
+        const countNumber = document.getElementById('ballCount')
 
         while (isTransitioning) {
             hue += 1;
@@ -175,6 +174,7 @@ async function transition() {
             bodyTransition.style.backgroundColor = 'transparent';
             bodyTransition.style.backgroundImage = `url('Assets/Images/razer_rainbow_spectrum_background-wallpaper-3840x2160.jpg')`;
             bodyTransition.style.backgroundSize = 'cover';
+            countNumber.style.color = `hsl(${hue}, 100%, 50%)`;
 
             await new Promise(resolve => setTimeout(resolve, 5));
         }
@@ -183,6 +183,7 @@ async function transition() {
             transitionButton.style.backgroundColor = '';
             bodyTransition.style.backgroundImage = '';
             bodyTransition.style.backgroundSize = '';
+            countNumber.style.color = '';
             balls.forEach(ball => {
                 ball.color = `hsl(232, 71%, 44%)`;
             });
@@ -272,7 +273,7 @@ document.addEventListener('keydown', function (event) {
 })
 
 document.addEventListener('keydown', function (event) {
-    if (event.key === "Backspace" || event.code === "Backspace") {
+    if (event.key === "Delete" || event.code === "Delete") {
         gpcxt.clearRect(0, 0, gamePad.width, gamePad.height)
 
         balls = [];

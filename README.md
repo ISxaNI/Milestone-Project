@@ -50,9 +50,13 @@ ArrowUp: Increase Size
 ArrowDown: Decrease Size
 ArrowLeft: Slow down speed
 ArrowRight: Accelerate speed
-Backspace: Clear Page
+Delete: Clear Page
 Enter: Spawn in while keeping in mind of the custom amount
 Space: Spawn individual
+
+
+
+G: Press n find out (its better if you already have balls in the box. The more balls, the better!)
 
 ---------------------------------------------------------------------------------------------------------------------------
                    SITES, REPOSITORIES, AND SOURCES WHICH I HAVE SOURCED MY INFORMATION AND CODE FROM.
