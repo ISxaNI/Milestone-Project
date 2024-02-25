@@ -1,6 +1,6 @@
 body {
     background-image: url(/Assets/Images/glossy_blue_balls_background-wallpaper-3840x2160.jpg);
-background-size: cover;
+background-size: fill;
 background-repeat: no-repeat;
 }
 

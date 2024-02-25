@@ -1,6 +1,7 @@
 //=====================================LET AND CONSTANTS START========================================
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
+let gravityEnabled = false;
 let isTransitioning = false;
 let isColorShifting = false;
 let hue = 250;
@@ -30,6 +31,11 @@ function createBall() {
     });
 }
 
+function updateBallCount() {
+    const count = balls.length;
+    document.getElementById('ballCount').innerText = 'Ball Count: ' + count;
+}
+
 function addBallButton() {
     const newBall = {
         color: `hsl(232, 71%, 44%)`,
@@ -40,6 +46,7 @@ function addBallButton() {
         radius: 10
     };
     balls.push(newBall);
+    updateBallCount();
 }
 
 function addMultipleBalls(SpawnAmount) {
@@ -103,6 +110,17 @@ function handleCollision(ball1, ball2, dx, dy, distance) {
     ball2.dy += (tP1 - tP2) * vecy;
 }
 
+function toggleGravity() {
+    gravityEnabled = !gravityEnabled;
+}
+
+function applyGravity() {
+    if(gravityEnabled) {
+        for (let i = 0; i < balls.length; i++) {
+            balls[i].dy += 0.37;
+        }
+    }
+}
 //================================================FUNCTIONS END======================================
 //==========================ASYNC FUNCTIONS, REPEATING LOOPS AND TOGGLES START ======================
 
@@ -156,6 +174,7 @@ async function transition() {
             transitionButton.style.backgroundSize = 'cover'; 
             bodyTransition.style.backgroundColor = 'transparent';
             bodyTransition.style.backgroundImage = `url('Assets/Images/razer_rainbow_spectrum_background-wallpaper-3840x2160.jpg')`;
+            bodyTransition.style.backgroundSize = 'cover';
 
             await new Promise(resolve => setTimeout(resolve, 5));
         }
@@ -163,6 +182,7 @@ async function transition() {
             transitionButton.style.backgroundImage = '';
             transitionButton.style.backgroundColor = '';
             bodyTransition.style.backgroundImage = '';
+            bodyTransition.style.backgroundSize = '';
             balls.forEach(ball => {
                 ball.color = `hsl(232, 71%, 44%)`;
             });
@@ -213,8 +233,8 @@ document.getElementById('Speeddown').addEventListener('click', function () {
 
 document.getElementById('Clear').addEventListener('click', function () {
     gpcxt.clearRect(0, 0, gamePad.width, gamePad.height)
-
     balls = [];
+    updateBallCount();
 })
 //======================================================KEYSTROKE EVENTS=============================
 document.addEventListener('keydown', function (event) {
@@ -256,6 +276,7 @@ document.addEventListener('keydown', function (event) {
         gpcxt.clearRect(0, 0, gamePad.width, gamePad.height)
 
         balls = [];
+        updateBallCount();
     }
 })
 
@@ -276,6 +297,12 @@ document.addEventListener('keydown', function (event) {
         })
     }
 })
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "g" || event.code === "G") {
+        toggleGravity()
+    }
+})
 //======================================================KEYSTROKE EVENTS=============================
 document.getElementById('Color').addEventListener('click', colorShiftToggle);
 
@@ -285,6 +312,7 @@ document.getElementById('Rainbow').addEventListener('click', transition)
 function toss() {
     gpcxt.clearRect(0, 0, gamePad.width, gamePad.height);
     createBall();
+    applyGravity();
     updateBallPosition();
     detectBallCollisions();
     detectCollisions();
