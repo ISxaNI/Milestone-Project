@@ -1,4 +1,5 @@
 //=====================================LET AND CONSTANTS START========================================
+const background = document.getElementById('body')
 const gamePad = document.getElementById('canvas');
 const gpcxt = gamePad.getContext("2d");
 const Counter = document.getElementById(ballCount)
@@ -19,6 +20,12 @@ let ball = {
 }
 //========================================LET AND CONSTANTS END======================================
 //============================================FUNCTIONS START========================================
+function backgroundRender() {
+    background.style.backgroundImage = `url('Assets/Images/BlueBackground.jpg')`;
+}
+
+backgroundRender()
+
 function createBall() {
     balls.forEach(ball => {
         gpcxt.beginPath();
