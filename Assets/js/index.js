@@ -153,6 +153,9 @@ async function colorShiftToggle() {
         if (!isColorShifting) {
             toggleButton.style.backgroundImage = ``;
             toggleButton.style.backgroundColor = ``;
+            balls.forEach(ball => {
+                ball.color = `hsl(232, 71%, 44%)`;
+            });
         }
     }
 }
